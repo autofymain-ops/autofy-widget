@@ -1,0 +1,23 @@
+// Autofy 官方網站用的小視窗薄 JS
+(function () {
+  // 1. 動態載入核心 core.js
+  var s = document.createElement("script");
+  s.src = "https://autofymain-ops.github.io/autofy-widget/core.js"; // 你的 core.js 網址
+  s.defer = true;
+  document.head.appendChild(s);
+
+  // 2. core.js 載入完成 → 初始化 AutofyWidget
+  s.onload = function () {
+    if (!window.AutofyWidget || !window.AutofyWidget.init) {
+      console.error("[Autofy] core.js 尚未正確載入");
+      return;
+    }
+
+    window.AutofyWidget.init({
+      companyId: "AUTOFY",
+
+      // ⬇⬇⬇ 這裡之後要換成「Autofy Web 專用的 Cloudflare Worker URL」⬇⬇⬇
+      workerUrl: "https://YOUR-AUTOFY-WORKER.workers.dev"
+    });
+  };
+})();
